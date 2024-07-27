@@ -1,8 +1,12 @@
 import React from 'react'
+import Cards from '../components/Homepage/Cards'
+
 
 const Pendingtasks = () => {
   return (
-    <>PT</>
+    <div>
+      <Cards home={"false"} />
+    </div>
   )
 }
 

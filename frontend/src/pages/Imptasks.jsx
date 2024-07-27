@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Cards from "../components/Homepage/Cards";
 
 const Imptasks = () => {
   return (
-    <>IT</>
-  )
-}
+    <div>
+      <Cards home={"false"}/>
+    </div>
+  );
+};
 
-export default Imptasks
+export default Imptasks;
