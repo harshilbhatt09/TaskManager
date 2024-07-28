@@ -3,7 +3,7 @@ import { FaRegHeart, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
-const Cards = ({ home }) => {
+const Cards = ({ home, setInputdiv }) => {
   const data = [
     {
       title: "PostmanAPI",
@@ -57,10 +57,10 @@ const Cards = ({ home }) => {
         </div>
       ))}
       {home === "true" && (
-        <div className="border rounded p-4 bg-teal-950 flex flex-col justify-center items-center hover:cursor-pointer hover:scale-105 transition-all duration-200">
+        <button onClick={() => setInputdiv("fixed")} className="border rounded p-4 bg-teal-950 flex flex-col justify-center items-center hover:cursor-pointer hover:scale-105 transition-all duration-200">
           <IoMdAddCircle className="text-5xl mb-4" />
           <div className="text-2xl">Add Task</div>
-        </div>
+        </button>
       )}
     </div>
   );
