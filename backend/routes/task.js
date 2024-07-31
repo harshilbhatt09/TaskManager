@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Task = require("../models/task");
 const User = require("../models/users");
+const { authenticateToken } = require("./auth");
 
-router.post("/create-task", async (req, res) => {
+router.post("/create-task", authenticateToken, async (req, res) => {
     try {
         const { title, desc } = req.body;
         const { id } = req.headers;
