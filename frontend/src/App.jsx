@@ -7,6 +7,7 @@ import Completedtasks from "./pages/Completedtasks";
 import Pendingtasks from "./pages/Pendingtasks";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import { useSelector } from "react-redux";
 
 const App = () => {
   return (
@@ -14,13 +15,13 @@ const App = () => {
       <Router>
         <Routes>
           <Route exact path="/" element={<Homepage />}>
-            <Route index element={<Alltasks/>} />
-            <Route path="/imp" element={<Imptasks/>} />
-            <Route path="/completed" element={<Completedtasks/>} />
-            <Route path="/pending" element={<Pendingtasks/>} />
+            <Route index element={<Alltasks />} />
+            <Route path="/imp" element={<Imptasks />} />
+            <Route path="/completed" element={<Completedtasks />} />
+            <Route path="/pending" element={<Pendingtasks />} />
           </Route>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </div>
