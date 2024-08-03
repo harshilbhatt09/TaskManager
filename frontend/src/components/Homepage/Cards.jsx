@@ -29,7 +29,7 @@ const Cards = ({ home, setInputdiv }) => {
   return (
     <div className="grid grid-cols-3 gap-4">
       {data.map((items, i) => (
-        <div className="border rounded p-4 bg-teal-950 flex flex-col justify-between">
+        <div key={i} className="border rounded p-4 bg-teal-950 flex flex-col justify-between">
           <div>
             <h3 className="font-semibold text-xl">{items.title}</h3>
             <p className="my-2">{items.des}</p>
