@@ -43,7 +43,7 @@ router.delete("/delete-task/:id", authenticateToken, async (req, res) => {
     }
 })
 
-router.put("/update-task:id", authenticateToken, async (req, res) => {
+router.put("/update-task/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params
         const { title, desc } = req.body;
@@ -55,7 +55,7 @@ router.put("/update-task:id", authenticateToken, async (req, res) => {
     }
 })
 
-router.put("/update-imp-task:id", authenticateToken, async (req, res) => {
+router.put("/update-imp-task/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params
         const TaskData = await Task.findById(id);
@@ -68,12 +68,12 @@ router.put("/update-imp-task:id", authenticateToken, async (req, res) => {
     }
 })
 
-router.put("/update-complete-task:id", authenticateToken, async (req, res) => {
+router.put("/update-complete-task/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params
         const TaskData = await Task.findById(id);
         const CompleteTask = TaskData.complete;
-        await task.findByIdAndUpdate(id, { complete: !CompleteTask })
+        await Task.findByIdAndUpdate(id, { complete: !CompleteTask })
         res.status(200).json({ message: "Task Updated" })
     } catch (error) {
         console.log(error);

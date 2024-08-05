@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Signup = () => {
+  const history = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  if (isLoggedIn === true) {
+    history("/");
+  }
   const [Data, setData] = useState({ username: "", email: "", password: "" });
   const change = (e) => {
     const { name, value } = e.target;
@@ -17,7 +23,9 @@ const Signup = () => {
           "http://localhost:1000/api/v1/sign-in",
           Data
         );
-        console.log(response);
+        setData({ username: "", email: "", password: "" });
+        alert(response.data.message);
+        history("/login");
       }
     } catch (error) {
       alert(error.response.data.message);
