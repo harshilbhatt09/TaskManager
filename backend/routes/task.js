@@ -47,7 +47,7 @@ router.put("/update-task/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params
         const { title, desc } = req.body;
-        await task.findByIdAndUpdate(id, { title: title, desc: desc })
+        await Task.findByIdAndUpdate(id, { title: title, desc: desc })
         res.status(200).json({ message: "Task Updated" })
     } catch (error) {
         console.log(error);
@@ -60,7 +60,7 @@ router.put("/update-imp-task/:id", authenticateToken, async (req, res) => {
         const { id } = req.params
         const TaskData = await Task.findById(id);
         const ImpTask = TaskData.important;
-        await task.findByIdAndUpdate(id, { important: !ImpTask })
+        await Task.findByIdAndUpdate(id, { important: !ImpTask })
         res.status(200).json({ message: "Task Updated" })
     } catch (error) {
         console.log(error);

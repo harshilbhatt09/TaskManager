@@ -7,6 +7,11 @@ import axios from "axios";
 const Alltasks = () => {
   const [Inputdiv, setInputdiv] = useState("hidden");
   const [Data, setData] = useState();
+  const [UpdatedData, setUpdatedData] = useState({
+    id: "",
+    title: "",
+    desc: "",
+  });
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -19,7 +24,9 @@ const Alltasks = () => {
       );
       setData(response.data.data);
     };
-    fetch();
+    if (localStorage.getItem("id") && localStorage.getItem("token")) {
+      fetch();
+    }
   });
   return (
     <>
@@ -30,9 +37,19 @@ const Alltasks = () => {
           </button>
         </div>
         {Data && (
-          <Cards home={"true"} setInputdiv={setInputdiv} data={Data.tasks} />
+          <Cards
+            home={"true"}
+            setInputdiv={setInputdiv}
+            data={Data.tasks}
+            setUpdatedData={setUpdatedData}
+          />
         )}
-        <InputData Inputdiv={Inputdiv} setInputdiv={setInputdiv} />
+        <InputData
+          Inputdiv={Inputdiv}
+          setInputdiv={setInputdiv}
+          UpdatedData={UpdatedData}
+          setUpdatedData={setUpdatedData}
+        />
       </div>
     </>
   );

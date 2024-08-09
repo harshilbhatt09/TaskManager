@@ -1,10 +1,12 @@
 import React from "react";
-import { FaRegHeart, FaEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IoHeart } from "react-icons/io5";
 import axios from "axios";
 
-const Cards = ({ home, setInputdiv, data }) => {
+const Cards = ({ home, setInputdiv, data = [], setUpdatedData }) => {
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -22,22 +24,34 @@ const Cards = ({ home, setInputdiv, data }) => {
     }
   };
 
-  const handleImpTask = async () => {
+  const handleImpTask = async (id) => {
     try {
-      const response = await axios.put(
-        "http://localhost:1000/api/v2/get-imp-tasks",
+      await axios.put(
+        `http://localhost:1000/api/v2/update-imp-task/${id}`,
         {},
         { headers }
       );
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`http://localhost:1000/api/v2/delete-task/${id}`, {
+        headers,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleUpdate = (id, title, desc) => {
+    setInputdiv("fixed");
+    setUpdatedData({ id: id, title: title, desc: desc });
+  };
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      {data.map((items) => (
+      {data.map((items, i) => (
         <div
           key={items._id}
           className="border rounded p-4 bg-teal-950 flex flex-col justify-between"
@@ -57,12 +71,22 @@ const Cards = ({ home, setInputdiv, data }) => {
             </button>
             <div className="w-1/2 p-2 flex justify-around text-xl">
               <button onClick={() => handleImpTask(items._id)}>
-                <FaRegHeart />
+                {items.important === false ? (
+                  <IoMdHeartEmpty />
+                ) : (
+                  <IoHeart className="text-red-500" />
+                )}
               </button>
-              <button>
-                <FaEdit />
-              </button>
-              <button>
+              {home === "true" && (
+                <button
+                  onClick={() =>
+                    handleUpdate(items._id, items.title, items.desc)
+                  }
+                >
+                  <FaEdit />
+                </button>
+              )}
+              <button onClick={() => deleteTask(items._id)}>
                 <MdDelete />
               </button>
             </div>

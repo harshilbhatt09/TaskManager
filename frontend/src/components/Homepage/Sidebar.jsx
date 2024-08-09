@@ -58,7 +58,9 @@ const Sidebar = () => {
       );
       setData(response.data.data);
     };
-    fetch();
+    if (localStorage.getItem("id") && localStorage.getItem("token")) {
+      fetch();
+    }
   }, []);
 
   return (
